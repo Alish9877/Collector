@@ -9,3 +9,6 @@ def home(request):
 def about(request):
     # return HttpResponse("<h1>About the cat collector</h1>")
     return render(request, 'about.html')
+
+def car_index(request):
+    return render(request, 'cars/index.html' , {'cars': cars})

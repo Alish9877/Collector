@@ -6,43 +6,44 @@ from django.views.generic import ListView , DetailView
 from .forms import FeedingForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 
-class BirdCreate(CreateView):
+class BirdCreate(LoginRequiredMixin ,CreateView):
     model = Bird
     # fields = '__all__'  If a stand alone model use this line otherwise restrict user
     fields = ['name', 'breed', 'description', 'age', 'image']
-    # success_url = '/cats/'
+    success_url = '/birds/'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class BirdUpdate(UpdateView):
+class BirdUpdate(LoginRequiredMixin,UpdateView):
     model = Bird
     fields = ['breed', 'description', 'age']
 
-class BirdDelete(DeleteView):
+class BirdDelete(LoginRequiredMixin,DeleteView):
     model = Bird
     success_url = '/birds/'
 
 # toys CRUD
-class ToyList(ListView):
+class ToyList(LoginRequiredMixin,ListView):
     model = Toy
 
-class ToyDetail(DetailView):
+class ToyDetail(LoginRequiredMixin,DetailView):
     model = Toy
 
-class ToyCreate(CreateView):
+class ToyCreate(LoginRequiredMixin,CreateView):
     model = Toy
     fields = '__all__'
 
-class ToyUpdate(UpdateView):
+class ToyUpdate(LoginRequiredMixin,UpdateView):
     model = Toy
     fields = ['name' , 'color']
 
-class ToyDelete(DeleteView):
+class ToyDelete(LoginRequiredMixin,DeleteView):
     model = Toy
     success_url = '/toys/'
 

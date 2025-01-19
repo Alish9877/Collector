@@ -4,7 +4,7 @@
 
 <h1>Bird List</h1>
 
-<!-- {% for bird in birds %} -->
+{% for bird in birds %}
   <div class="card">
     <a href="{% url 'detail' bird.id %}">
     <div class="card-content">
@@ -31,5 +31,5 @@
   </div>
   </a>
   </div>
-<!-- {% endfor %} -->
+{% endfor %}
 {% endblock %}
